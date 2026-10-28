@@ -34,8 +34,6 @@
       </nav>
     </div>
   </header>
-
-  <main id="top">
     <section class="hero">
       <div class="wrap hero-inner">
         <div class="hero-copy">
@@ -65,14 +63,14 @@
             <div class="editor-chrome">
               <span class="dots"><i></i><i></i><i></i></span>
               <div class="editor-tabs">
-                <span class="tab is-active">closures.js</span>
+                <span class="tab is-active">main.cpp</span>
                 <span class="tab">notas.md</span>
               </div>
               <span class="editor-branch"><svg viewBox="0 0 16 16" fill="none"><circle cx="4.5" cy="3.5" r="1.5" stroke="currentColor"/><circle cx="4.5" cy="12.5" r="1.5" stroke="currentColor"/><circle cx="11.5" cy="6.5" r="1.5" stroke="currentColor"/><path d="M4.5 5v6M4.5 9c0-1.5 3.5.5 3.5-1V8" stroke="currentColor" stroke-linecap="round"/></svg> main</span>
             </div>
             <div class="editor-code">
-              <div class="hline"><span class="ln">1</span><code><span class="tok-kw">function</span> <span class="tok-fn">criarContador</span>() {</code></div>
-              <div class="hline"><span class="ln">2</span><code>  <span class="tok-kw">let</span> total = <span class="tok-num">0</span>;</code></div>
+              <div class="hline"><span class="ln">1</span><code><span class="tok-kw">int</span> <span class="tok-fn">criarContador</span>() {</code></div>
+              <div class="hline"><span class="ln">2</span><code>  <span class="tok-kw">int</span> total = <span class="tok-num">0</span>;</code></div>
               <div class="hline"><span class="ln">3</span><code>&nbsp;</code></div>
               <div class="hline"><span class="ln">4</span><code>  <span class="tok-kw">return</span> <span class="tok-kw">function</span> () {</code></div>
               <div class="hline is-active"><span class="ln">5</span><code>    total += <span class="tok-num">1</span>;</code></div>
@@ -80,7 +78,7 @@
               <div class="hline"><span class="ln">7</span><code>  };</code></div>
               <div class="hline"><span class="ln">8</span><code>}</code></div>
               <div class="hline"><span class="ln">9</span><code>&nbsp;</code></div>
-              <div class="hline"><span class="ln">10</span><code><span class="tok-kw">const</span> contador = <span class="tok-fn">criarContador</span>();</code></div>
+              <div class="hline"><span class="ln">10</span><code><span class="tok-kw">int</span> contador = <span class="tok-fn">criarContador</span>();</code></div>
               <div class="hline"><span class="ln">11</span><code>contador(); <span class="tok-comment">// 1</span></code></div>
               <div class="hline"><span class="ln">12</span><code>contador(); <span class="tok-comment">// 2</span></code></div>
             </div>
@@ -95,7 +93,7 @@
               <span>LF</span>
             </div>
           </div>
-          <div class="float-tag float-tag-a" aria-hidden="true"><i style="--dot: var(--amber)"></i>closures</div>
+          <div class="float-tag float-tag-a" aria-hidden="true"><i style="--dot: var(--amber)"></i>code something</div>
           <div class="float-tag float-tag-b" aria-hidden="true"><span class="check">✓</span> revisado em 2 min</div>
         </div>
       </div>
@@ -144,289 +142,31 @@
 
         <div class="notes-grid" id="notes-grid">
           <!--#region-->COMECA OS CARD
-          <article class="card">
-            <h2>Closures: funções que lembram de onde nasceram</h2>
-            <p class="tag">javascript</p>
-            <p class="lang">javascript</p>
-            <p class="file">closures.js</p>
-            <time class="date" datetime="2026-10-27">2026-10-27</time>
-            <div class="explanation">
-              <p>Uma closure nasce quando uma função interna continua acessando o escopo onde foi criada, mesmo depois que a função externa terminou de executar.</p>
-              <p>O valor não é copiado: a função mantém uma referência viva ao ambiente léxico. Por isso <code>total</code> sobrevive entre as chamadas e cada chamada de <code>criarContador()</code> cria um estado independente.</p>
-              <ul>
-                <li>Cada chamada cria um novo escopo.</li>
-                <li>As variáveis ficam privadas, inacessíveis de fora.</li>
-                <li>Módulos e memoização dependem desse comportamento.</li>
-              </ul>
-              <p>Cuidado com o clássico loop usando <code>var</code>: todas as funções acabam apontando para a mesma variável.</p>
-            </div>
-            <pre class="code"><code>function criarContador() {
-  let total = 0;
-
-  return function () {
-    total += 1;
-    return total;
-  };
-}
-
-const contador = criarContador();
-contador(); // 1
-contador(); // 2</code></pre>
-            <ul class="concepts">
-              <li>escopo léxico</li>
-              <li>estado privado</li>
-              <li>fábrica de funções</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>Grid responsivo com uma linha de CSS</h2>
-            <p class="tag">css</p>
-            <p class="lang">css</p>
-            <p class="file">galeria.css</p>
-            <time class="date" datetime="2026-10-25">2026-10-25</time>
-            <div class="explanation">
-              <p><code>repeat(auto-fit, minmax(220px, 1fr))</code> já resolve a maior parte dos grids responsivos: cada coluna tem no mínimo 220px e dividem o espaço restante igualmente, quebrando linhas quando necessário.</p>
-              <p>A diferença entre <code>auto-fit</code> e <code>auto-fill</code> aparece quando sobram colunas: <code>auto-fit</code> colapsa as vazias e estica as existentes; <code>auto-fill</code> mantém os espaços fantasma.</p>
-              <ul>
-                <li><code>minmax(0, 1fr)</code> evita estouro de conteúdo.</li>
-                <li><code>gap</code> substitui margins entre itens.</li>
-                <li><code>min-width: 0</code> em filhos ajuda com textos longos.</li>
-              </ul>
-            </div>
-            <pre class="code"><code>.galeria {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.galeria > article {
-  min-width: 0;
-  padding: 20px;
-  border: 1px solid #24241f;
-  border-radius: 12px;
-}</code></pre>
-            <ul class="concepts">
-              <li>auto-fit</li>
-              <li>minmax</li>
-              <li>container</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>useEffect sem cleanup é uma armadilha</h2>
-            <p class="tag">react</p>
-            <p class="lang">react</p>
-            <p class="file">nota.jsx</p>
-            <time class="date" datetime="2026-10-23">2026-10-23</time>
-            <div class="explanation">
-              <p>Todo efeito que cria algo fora do React precisa devolver uma função de limpeza. O cleanup roda antes do próximo efeito e quando o componente é desmontado.</p>
-              <p>No exemplo, a flag <code>ativo</code> evita atualizar estado depois que o componente sai da tela ou o <code>id</code> muda. Sem isso, uma resposta antiga pode vencer uma requisição mais recente — a clássica race condition.</p>
-              <ul>
-                <li>Dependências controlam quando o efeito roda.</li>
-                <li>Requisições podem ser canceladas com <code>AbortController</code>.</li>
-                <li>Timers e listeners sempre precisam de cleanup.</li>
-              </ul>
-            </div>
-            <pre class="code"><code>import { useEffect, useState } from "react";
-
-export function Nota({ id }) {
-  const [nota, setNota] = useState(null);
-
-  useEffect(() => {
-    let ativo = true;
-
-    fetch("/api/notas/" + id)
-      .then((res) =&gt; res.json())
-      .then((dados) =&gt; {
-        if (ativo) setNota(dados);
-      });
-
-    return () =&gt; {
-      ativo = false;
-    };
-  }, [id]);
-
-  return nota ? &lt;h1&gt;{nota.titulo}&lt;/h1&gt; : null;
-}</code></pre>
-            <ul class="concepts">
-              <li>modelo de efeito</li>
-              <li>race condition</li>
-              <li>AbortController</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>Rebase interativo: limpando o histórico</h2>
-            <p class="tag">git</p>
-            <p class="lang">shell</p>
-            <p class="file">rebase.sh</p>
-            <time class="date" datetime="2026-10-21">2026-10-21</time>
-            <div class="explanation">
-              <p><code>git rebase -i</code> abre uma lista de commits para reescrever. Você escolhe o que manter (<code>pick</code>), junta (<code>squash</code>), reescreve a mensagem (<code>reword</code>) ou remove (<code>drop</code>).</p>
-              <p>O resultado é um histórico linear e fácil de bisectar. A contrapartida: os commits são recriados com novos hashes, então nunca faça rebase de algo que outra pessoa já usa.</p>
-              <ul>
-                <li><code>squash</code> junta commits e pede uma mensagem final.</li>
-                <li><code>fixup</code> junta sem abrir o editor.</li>
-                <li>Se der errado: <code>git rebase --abort</code>.</li>
-              </ul>
-            </div>
-            <pre class="code"><code>git fetch origin
-git rebase -i origin/main
-
-# no editor, troque pick por squash
-pick   a1b2c3d adiciona card
-squash d4e5f6a corrige espaçamento
-reword 7890abc ajusta copy</code></pre>
-            <ul class="concepts">
-              <li>rebase interativo</li>
-              <li>squash</li>
-              <li>histórico</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>Comprehensions que ainda dá pra ler</h2>
-            <p class="tag">python</p>
-            <p class="lang">python</p>
-            <p class="file">comprehensions.py</p>
-            <time class="date" datetime="2026-10-19">2026-10-19</time>
-            <div class="explanation">
-              <p>Comprehensions são ótimas quando cabem em <strong>uma linha e um pensamento</strong>. List, dict e set comprehensions evitam o loop com <code>append</code> e deixam a intenção explícita.</p>
-              <p>Quando existe mais de um <code>for</code> ou uma condição aninhada demais, volte para o loop normal. Legibilidade ganha da esperteza.</p>
-              <ul>
-                <li>Use generators quando não precisa materializar a lista.</li>
-                <li><code>sum(1 for ...)</code> conta sem criar array intermediário.</li>
-                <li>Dict comprehension exige chave e valor.</li>
-              </ul>
-            </div>
-            <pre class="code"><code>pares_ao_quadrado = [n ** 2 for n in range(10) if n % 2 == 0]
-
-titulos_por_id = {nota.id: nota.titulo for nota in notas}
-
-contagem = sum(1 for n in numeros if n &gt; 0)</code></pre>
-            <ul class="concepts">
-              <li>legibilidade</li>
-              <li>generator</li>
-              <li>filtro</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>LEFT JOIN: o que não casa também importa</h2>
-            <p class="tag">sql</p>
-            <p class="lang">sql</p>
-            <p class="file">joins.sql</p>
-            <time class="date" datetime="2026-10-16">2026-10-16</time>
-            <div class="explanation">
-              <p><code>INNER JOIN</code> devolve só os pares que existem dos dois lados. <code>LEFT JOIN</code> mantém todas as linhas da esquerda, preenchendo o resto com <code>NULL</code> — inclusive usuários sem nenhuma nota.</p>
-              <p>Um detalhe que morde: filtros no <code>WHERE</code> sobre a tabela da direita transformam o <code>LEFT JOIN</code> em <code>INNER</code>. Se quer preservar quem não tem correspondência, coloque a condição no <code>ON</code>.</p>
-              <ul>
-                <li><code>COUNT(coluna)</code> ignora <code>NULL</code>; <code>COUNT(*)</code> não.</li>
-                <li><code>HAVING</code> filtra depois da agregação.</li>
-                <li>Sempre qualifique as colunas no <code>ON</code>.</li>
-              </ul>
-            </div>
-            <pre class="code"><code>SELECT u.nome, COUNT(n.id) AS total_notas
-FROM usuarios u
-LEFT JOIN notas n ON n.usuario_id = u.id
-GROUP BY u.id, u.nome
-HAVING COUNT(n.id) &gt; 0
-ORDER BY total_notas DESC;</code></pre>
-            <ul class="concepts">
-              <li>left join</li>
-              <li>agregação</li>
-              <li>where vs on</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>Generics: flexibilidade sem perder tipos</h2>
-            <p class="tag">typescript</p>
-            <p class="lang">typescript</p>
-            <p class="file">primeiro.ts</p>
-            <time class="date" datetime="2026-10-12">2026-10-12</time>
-            <div class="explanation">
-              <p>Generics permitem escrever uma função que funciona para vários tipos sem abrir mão do retorno tipado. O <code>T</code> é um parâmetro de tipo: quem chama decide o valor dele, e o TypeScript infere na maioria dos casos.</p>
-              <p>Use constraints (<code>T extends { id: string }</code>) quando o corpo precisa acessar propriedades específicas. Sem constraint, o tipo é tão aberto que você não consegue fazer quase nada.</p>
-              <ul>
-                <li>Evite <code>any</code> disfarçado de generic.</li>
-                <li>Prefira inferência a tipar tudo na mão.</li>
-                <li>Generics também valem para componentes e hooks.</li>
-              </ul>
-            </div>
-            <pre class="code"><code>function primeiro&lt;T&gt;(itens: T[]): T | undefined {
-  return itens[0];
-}
-
-const nota = primeiro([{ titulo: "closures" }]);
-// nota: { titulo: string } | undefined</code></pre>
-            <ul class="concepts">
-              <li>parâmetro de tipo</li>
-              <li>constraints</li>
-              <li>inferência</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h2>Persistência local: rascunhos que sobrevivem ao refresh</h2>
-            <p class="tag">web</p>
-            <p class="lang">javascript</p>
-            <p class="file">rascunho.js</p>
-            <time class="date" datetime="2026-10-08">2026-10-08</time>
-            <div class="explanation">
-              <p><code>localStorage</code> guarda strings por origem, de forma síncrona e sem prazo de validade. Para objetos, o caminho é <code>JSON.stringify</code> na escrita e <code>JSON.parse</code> na leitura — com tratamento para valores corrompidos.</p>
-              <p>É útil para preferências e rascunhos pequenos. Nesta página, o conteúdo das notas vive no próprio HTML; o armazenamento local fica reservado para preferências de leitura, como o último filtro usado.</p>
-              <ul>
-                <li>Limite de ~5 MB por origem.</li>
-                <li>É síncrono: bloqueia a main thread.</li>
-                <li><code>sessionStorage</code> morre ao fechar a aba.</li>
-              </ul>
-              <p>Para dados compartilhados, o conteúdo precisa ir para o repositório.</p>
-            </div>
-            <pre class="code"><code>const CHAVE = "learn:rascunho";
-
-export function carregar() {
-  try {
-    return JSON.parse(localStorage.getItem(CHAVE)) ?? null;
-  } catch {
-    return null;
-  }
-}
-
-export function salvar(dados) {
-  localStorage.setItem(CHAVE, JSON.stringify(dados));
-}</code></pre>
-            <ul class="concepts">
-              <li>JSON</li>
-              <li>por origem</li>
-              <li>rascunho</li>
-            </ul>
-          </article>
           
           <article class="card">
-            <h2>TITULO/TEMA</h2>
-            <p class="tag">javascript</p>
-            <p class="lang">LINGUAGEM</p>
-            <p class="file">ARQUIVO</p>
-            <time class="date" datetime="2026-10-27">data</time>
+            <h2>Primeiro Card</h2>
+            <p class="tag">JavaScript</p>
+            <p class="lang">JavaScript</p>
+            <p class="file">first.js</p>
+            <time class="date" datetime="2026-10-27">27 de outubro de 2026</time>
             <div class="explanation">
-              <p>paragrafo</p>
-              <p>paragrafo</p>
+              <p>criando o primeiro card para visualização, clique no card para ver mais detalhes</p>
+              <p>cada card representa uma ideia ou conceito aprendido</p>
               <ul>
-                <li>LISTA DENOVO</li>
-                <li>LISTA DENOVO</li>
-                <li>LISTA DENOVO</li>
+                <li>localstorage</li>
+                <li>Design com IA</li>
+                <li>paciencia com IA</li>
               </ul>
-              <p>MAIS ALGUMA COISA</p>
+              <p>Cada card contem sua propria estilização de acordo com a tag</p>
             </div>
-            <pre class="code">//espaco de codigo</pre>
+            <pre class="code">console.log('Hello, World!');</pre>
             <ul class="concepts">
-              <li>lista</li>
-              <li>lista</li>
-              <li>lista</li>
+              <li>ESPERO QUE GOSTEM!!!</li>
+              <li>ESPERO QUE GOSTEM!!!</li>
+              <li>ESPERO QUE GOSTEM!!!</li>
             </ul>
           </article>
+
           <!-- #endregion -->
         </div>
 
