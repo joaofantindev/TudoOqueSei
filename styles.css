@@ -952,6 +952,7 @@ button.chip-tag:hover {
   position: relative;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   padding: 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius);

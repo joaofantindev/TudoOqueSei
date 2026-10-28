@@ -73,7 +73,14 @@
       "Bash(cp \"C:/Users/joaof/Desktop/learn/app.js\" \"C:/Users/joaof/AppData/Local/Temp/learn-logout-test/app.js\" && cp \"C:/Users/joaof/Desktop/learn/data/learn.sqlite\" \"C:/Users/joaof/AppData/Local/Temp/learn-logout-test/data/learn.sqlite\" && node --check app.js && echo \"código atualizado e banco resetado\")",
       "Bash(cd \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check\" && node logout-check.js && echo \"=== edicao/exclusao/tag ===\" && node logout-edit-check.js && echo \"=== falha de rede ===\" && node logout-failure-check.js)",
       "Bash(rm -rf \"C:/Users/joaof/AppData/Local/Temp/learn-logout-test\" && rm -f \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-check.js\" \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-edit-check.js\" \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-failure-check.js\" && echo \"temporários removidos\")",
-      "Bash(rm -rf server.js data vendor && ls -la)"
+      "Bash(rm -rf server.js data vendor && ls -la)",
+      "Bash(npm root -g && ls \"$\\(npm root -g\\)\" 2>/dev/null | head -30 && ls ~/AppData/Local/ms-playwright 2>/dev/null | head)",
+      "Bash(find \"$HOME/AppData/Local/Temp\" -maxdepth 4 -type d -name playwright 2>/dev/null | head -5; find \"$HOME/AppData/Local/Temp\" -maxdepth 3 -name package.json -path '*node_modules*' 2>/dev/null | head -5)",
+      "Bash(ls -la ~/AppData/Local/ms-playwright/chromium-1187/chrome-win | head -30)",
+      "Bash(ls \"/c/Program Files/Google/Chrome/Application/chrome.exe\" 2>/dev/null; ls \"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" 2>/dev/null; ls \"/c/Program Files/Microsoft/Edge/Application/msedge.exe\" 2>/dev/null)",
+      "Read(//c/Program Files/Microsoft/Edge/Application/**)",
+      "Bash(find ~/AppData/Local/ms-playwright -maxdepth 2 | head -40; echo '---'; find ~/AppData/Local/ms-playwright -iname 'headless_shell.exe' -o -iname 'chrome-headless-shell.exe' | head)",
+      "Bash(npx playwright install chromium 2>&1 | tail -20)"
     ]
   }
 }
