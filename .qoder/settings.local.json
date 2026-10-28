@@ -72,7 +72,8 @@
       "Bash(cp \"C:/Users/joaof/Desktop/learn/data/learn.sqlite\" \"C:/Users/joaof/AppData/Local/Temp/learn-logout-test/data/learn.sqlite\" && echo \"db reset\")",
       "Bash(cp \"C:/Users/joaof/Desktop/learn/app.js\" \"C:/Users/joaof/AppData/Local/Temp/learn-logout-test/app.js\" && cp \"C:/Users/joaof/Desktop/learn/data/learn.sqlite\" \"C:/Users/joaof/AppData/Local/Temp/learn-logout-test/data/learn.sqlite\" && node --check app.js && echo \"código atualizado e banco resetado\")",
       "Bash(cd \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check\" && node logout-check.js && echo \"=== edicao/exclusao/tag ===\" && node logout-edit-check.js && echo \"=== falha de rede ===\" && node logout-failure-check.js)",
-      "Bash(rm -rf \"C:/Users/joaof/AppData/Local/Temp/learn-logout-test\" && rm -f \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-check.js\" \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-edit-check.js\" \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-failure-check.js\" && echo \"temporários removidos\")"
+      "Bash(rm -rf \"C:/Users/joaof/AppData/Local/Temp/learn-logout-test\" && rm -f \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-check.js\" \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-edit-check.js\" \"C:/Users/joaof/AppData/Local/Temp/learn-ui-check/logout-failure-check.js\" && echo \"temporários removidos\")",
+      "Bash(rm -rf server.js data vendor && ls -la)"
     ]
   }
 }
