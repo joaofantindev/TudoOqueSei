@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0a09">
+  <title>learn.log — repositório de aprendizados</title>
+  <meta name="description" content="Um devlog pessoal para anotar aprendizados de programação: snippets, explicações curtas e tags com cor — notas em um SQLite carregado no navegador.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230a0a09'/%3E%3Cpath d='M9 3H4.5A1.5 1.5 0 0 0 3 4.5V9M15 3h4.5A1.5 1.5 0 0 1 21 4.5V9M3 15v4.5A1.5 1.5 0 0 0 4.5 21H9' stroke='%23f3f0e8' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23ee8079'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="read-only">
+  <a class="skip-link" href="#notas">Pular para as notas</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="learn.log — início">
+        <svg class="brand-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 3H4.5A1.5 1.5 0 0 0 3 4.5V9M15 3h4.5A1.5 1.5 0 0 1 21 4.5V9M3 15v4.5A1.5 1.5 0 0 0 4.5 21H9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="17" cy="17" r="2" fill="#ee8079"/>
+        </svg>
+        <span class="brand-word">learn<span class="brand-dot">.</span>log</span>
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#notas">notas</a>
+        <a href="#sobre">sobre</a>
+        <a class="nav-ext" href="https://github.com/" target="_blank" rel="noopener">github <span aria-hidden="true">↗</span></a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn btn-ghost btn-sm btn-tags" type="button" data-open-tags aria-label="Tags e publicação">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 2.5h4.2l6.8 6.8-4.2 4.2-6.8-6.8v-4.2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="5.4" cy="5.4" r="1" fill="currentColor"/></svg>
+          <span class="btn-label">Painel</span>
+        </button>
+        <button class="btn btn-primary btn-sm btn-new" type="button" data-open-form aria-label="Nova nota">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="btn-label">Nova nota</span>
+        </button>
+        <button class="btn btn-ghost btn-sm auth-out" type="button" data-open-login aria-label="Entrar">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="5.4" r="2.4" stroke="currentColor" stroke-width="1.4"/><path d="M3.6 13.4c.6-2.3 2.3-3.7 4.4-3.7s3.8 1.4 4.4 3.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <span class="btn-label">entrar</span>
+        </button>
+        <div class="auth-in" aria-label="Sessão do autor">
+          <span class="user-chip"><i aria-hidden="true"></i><span id="user-label">autor</span></span>
+          <button class="btn btn-ghost btn-sm" type="button" data-logout>sair</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <span class="pill"><i class="live-dot" aria-hidden="true"></i> devlog pessoal · v2026.10</span>
+          <h1>Anote o que aprende.<br><span class="dim">Revise o que importa.</span></h1>
+          <p class="hero-sub">Um caderno público de programação: snippets, explicações curtas e tags que tingem a página. As notas vivem em um SQLite carregado no navegador — cada nota nova é um commit.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#notas">
+              Explorar notas
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <button class="btn btn-ghost" type="button" data-open-form>Registrar aprendizado</button>
+          </div>
+
+          <p class="hero-meta">
+            <span>html · css · js</span>
+            <span aria-hidden="true">/</span>
+            <span>sqlite via wasm</span>
+            <span aria-hidden="true">/</span>
+            <span>pensado para o github pages</span>
+          </p>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-glow" aria-hidden="true"></div>
+          <div class="editor hero-editor" aria-hidden="true">
+            <div class="editor-chrome">
+              <span class="dots"><i></i><i></i><i></i></span>
+              <div class="editor-tabs">
+                <span class="tab is-active">closures.js</span>
+                <span class="tab">notas.md</span>
+              </div>
+              <span class="editor-branch"><svg viewBox="0 0 16 16" fill="none"><circle cx="4.5" cy="3.5" r="1.5" stroke="currentColor"/><circle cx="4.5" cy="12.5" r="1.5" stroke="currentColor"/><circle cx="11.5" cy="6.5" r="1.5" stroke="currentColor"/><path d="M4.5 5v6M4.5 9c0-1.5 3.5.5 3.5-1V8" stroke="currentColor" stroke-linecap="round"/></svg> main</span>
+            </div>
+            <div class="editor-code">
+              <div class="hline"><span class="ln">1</span><code><span class="tok-kw">function</span> <span class="tok-fn">criarContador</span>() {</code></div>
+              <div class="hline"><span class="ln">2</span><code>  <span class="tok-kw">let</span> total = <span class="tok-num">0</span>;</code></div>
+              <div class="hline"><span class="ln">3</span><code>&nbsp;</code></div>
+              <div class="hline"><span class="ln">4</span><code>  <span class="tok-kw">return</span> <span class="tok-kw">function</span> () {</code></div>
+              <div class="hline is-active"><span class="ln">5</span><code>    total += <span class="tok-num">1</span>;</code></div>
+              <div class="hline"><span class="ln">6</span><code>    <span class="tok-kw">return</span> total;</code></div>
+              <div class="hline"><span class="ln">7</span><code>  };</code></div>
+              <div class="hline"><span class="ln">8</span><code>}</code></div>
+              <div class="hline"><span class="ln">9</span><code>&nbsp;</code></div>
+              <div class="hline"><span class="ln">10</span><code><span class="tok-kw">const</span> contador = <span class="tok-fn">criarContador</span>();</code></div>
+              <div class="hline"><span class="ln">11</span><code>contador(); <span class="tok-comment">// 1</span></code></div>
+              <div class="hline"><span class="ln">12</span><code>contador(); <span class="tok-comment">// 2</span></code></div>
+            </div>
+            <div class="editor-status">
+              <i class="status-dot" aria-hidden="true"></i>
+              <span>javascript</span>
+              <span class="sep" aria-hidden="true">·</span>
+              <span>alterações locais</span>
+              <span class="spacer"></span>
+              <span>UTF-8</span>
+              <span class="sep" aria-hidden="true">·</span>
+              <span>LF</span>
+            </div>
+          </div>
+          <div class="float-tag float-tag-a" aria-hidden="true"><i style="--dot: var(--amber)"></i>closures</div>
+          <div class="float-tag float-tag-b" aria-hidden="true"><span class="check">✓</span> revisado em 2 min</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats-bar">
+      <div class="wrap stats-inner">
+        <div class="stat"><strong id="stat-notes">0</strong><span>notas</span></div>
+        <div class="stat"><strong id="stat-tags">0</strong><span>assuntos</span></div>
+        <div class="stat"><strong id="stat-lines">0</strong><span>linhas de código</span></div>
+        <p class="stats-note">banco sqlite no navegador<br><span>data/learn.sqlite</span></p>
+      </div>
+    </div>
+
+    <section class="section" id="notas">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">/ notas</span>
+            <h2>Aprendizados recentes</h2>
+          </div>
+          <p class="section-desc">Filtre por assunto, busque por conceito ou abra uma nota para ler a explicação e o código completo.</p>
+        </div>
+
+        <div class="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5"/><path d="m13.2 13.2 3.3 3.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input id="search-input" type="search" placeholder="Buscar por título, tag ou código…" autocomplete="off" spellcheck="false" aria-label="Buscar notas">
+            <kbd aria-hidden="true">/</kbd>
+          </label>
+
+          <div class="toolbar-right">
+            <button class="draft-pill" id="dirty-pill" type="button" data-open-tags hidden>
+              <i aria-hidden="true"></i><span>rascunho local</span>
+            </button>
+            <span class="result-count" id="result-count" role="status" aria-live="polite"></span>
+            <label class="select-wrap">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <select id="sort-select" aria-label="Ordenar notas">
+                <option value="recent">Mais recentes</option>
+                <option value="oldest">Mais antigas</option>
+                <option value="az">Título A–Z</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="tagbar" id="tagbar" aria-label="Filtrar por assunto"></div>
+
+        <div class="db-state" id="db-state" data-state="loading" role="status" aria-live="polite">
+          <span class="db-spinner" aria-hidden="true"></span>
+          <span>carregando <code>data/learn.sqlite</code>…</span>
+        </div>
+
+        <div class="notes-grid" id="notes-grid"></div>
+
+        <div class="empty-state" id="empty-state" hidden></div>
+      </div>
+    </section>
+
+    <section class="section about" id="sobre">
+      <div class="wrap">
+        <div class="about-panel">
+          <div class="about-copy">
+            <span class="eyebrow">/ sobre</span>
+            <h2>Um repositório,<br>não um blog.</h2>
+            <p>Cada nota é curta de propósito: uma ideia, um exemplo de código e o que ficou de aprendizado. O objetivo não é escrever artigos — é criar um lugar para revisar rápido.</p>
+            <button class="btn btn-ghost" type="button" data-open-form>
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Adicionar uma nota
+            </button>
+          </div>
+          <ul class="about-list">
+            <li><span class="about-num">01</span><span><strong>SQLite de verdade.</strong> As notas vivem em <code>data/learn.sqlite</code>, carregado no navegador via sql.js (WASM) — sem servidor e sem build.</span></li>
+            <li><span class="about-num">02</span><span><strong>Tags com cor.</strong> Cada assunto tem uma cor própria que tinge os cards, os filtros e o destaque da página.</span></li>
+            <li><span class="about-num">03</span><span><strong>Busca instantânea.</strong> Filtre por tag, título, explicação ou trecho de código.</span></li>
+            <li><span class="about-num">04</span><span><strong>Login do autor.</strong> Quem visita só navega e filtra. Logado, você edita e baixa o banco atualizado para commitar.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 3H4.5A1.5 1.5 0 0 0 3 4.5V9M15 3h4.5A1.5 1.5 0 0 1 21 4.5V9M3 15v4.5A1.5 1.5 0 0 0 4.5 21H9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="17" cy="17" r="2" fill="#ee8079"/>
+        </svg>
+        <span>learn<span class="brand-dot">.</span>log</span>
+        <span class="footer-sep" aria-hidden="true">/</span>
+        <span id="footer-year">2026</span>
+      </div>
+      <div class="footer-links">
+        <span>um devlog sobre programar</span>
+        <span class="mode-badge" id="mode-badge">somente leitura</span>
+        <a href="https://github.com/" target="_blank" rel="noopener">github <span aria-hidden="true">↗</span></a>
+        <a href="#top">voltar ao topo ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <noscript>
+    <div class="noscript">Esta página precisa de JavaScript e WebAssembly para carregar o banco de notas.</div>
+  </noscript>
+
+  <div class="modal-layer" id="note-modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="note-title">
+      <div class="modal-chrome">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="crumbs">~/notes/<span id="note-file">nota.md</span></span>
+        <button class="icon-btn" type="button" data-close aria-label="Fechar nota">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="note-content"></div>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="form-modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal modal-form" role="dialog" aria-modal="true" aria-labelledby="form-title">
+      <div class="modal-chrome">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="crumbs">~/notes/<span id="form-crumb">nova-nota.md</span></span>
+        <button class="icon-btn" type="button" data-close aria-label="Fechar formulário">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <form class="note-form" id="note-form" novalidate>
+        <div class="form-head">
+          <span class="eyebrow" id="form-eyebrow">/ nova nota</span>
+          <h2 id="form-title">Registre um aprendizado</h2>
+          <p>Uma ideia, um snippet e uma explicação curta. Depois baixe o learn.sqlite e commite.</p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="f-title">Título</label>
+            <input id="f-title" name="title" type="text" required maxlength="90" placeholder="Ex: Entendendo closures em JavaScript" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="f-lang">Linguagem</label>
+            <div class="select-wrap select-field">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <select id="f-lang" name="lang">
+                <option value="javascript">JavaScript</option>
+                <option value="typescript">TypeScript</option>
+                <option value="react">React</option>
+                <option value="css">CSS</option>
+                <option value="html">HTML</option>
+                <option value="python">Python</option>
+                <option value="sql">SQL</option>
+                <option value="shell">Shell</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-tag">Assunto <span>define a cor do card</span></label>
+          <div class="select-wrap select-field">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 2.5h4.2l6.8 6.8-4.2 4.2-6.8-6.8v-4.2Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><circle cx="5.4" cy="5.4" r=".9" fill="currentColor"/></svg>
+            <select id="f-tag" name="tag" required></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-concepts">Conceitos <span>separados por vírgula</span></label>
+          <input id="f-concepts" name="concepts" type="text" placeholder="ex: escopo léxico, estado privado" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="f-explanation">Explicação</label>
+          <textarea id="f-explanation" name="explanation" rows="5" required placeholder="O que você aprendeu? Use linhas iniciadas com - para criar tópicos."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="f-code">Código <span>opcional</span></label>
+          <textarea id="f-code" name="code" rows="7" class="mono" spellcheck="false" placeholder="// cole o snippet aqui"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-ghost" type="button" data-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit" id="form-submit">Salvar nota</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="tags-modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal modal-tags" role="dialog" aria-modal="true" aria-labelledby="tags-title">
+      <div class="modal-chrome">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="crumbs">~/learn/data/<span>learn.sqlite</span></span>
+        <button class="icon-btn" type="button" data-close aria-label="Fechar tags e publicação">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="tags-body">
+        <div class="tags-head">
+          <span class="eyebrow">/ assuntos</span>
+          <h2 id="tags-title">Tags e publicação</h2>
+          <p class="modal-lead">Cada tag tem uma cor própria. A cor tinge o card da nota, o filtro ativo e o destaque da página. As mudanças ficam neste navegador como rascunho até você baixar o <code>learn.sqlite</code> atualizado.</p>
+        </div>
+
+        <section class="tags-section" aria-labelledby="tag-list-label">
+          <div class="tags-section-head">
+            <h3 id="tag-list-label">Suas tags</h3>
+            <span class="label" id="tag-total">0 tags</span>
+          </div>
+          <div class="tag-list" id="tag-list"></div>
+        </section>
+
+        <section class="tags-section" aria-labelledby="new-tag-label">
+          <div class="tags-section-head">
+            <h3 id="new-tag-label">Nova tag</h3>
+          </div>
+          <form class="tag-form" id="tag-form" novalidate>
+            <div class="tag-form-row">
+              <label class="tag-swatch tag-swatch-input" id="tag-color-wrap" style="--tag:#efb041" title="Escolher cor">
+                <input type="color" id="tag-color-input" value="#efb041" aria-label="Cor da nova tag">
+              </label>
+              <input id="tag-name-input" name="tag-name" type="text" maxlength="28" placeholder="ex: rust, docker, acessibilidade" autocomplete="off" required>
+              <button class="btn btn-primary btn-sm" type="submit">Criar tag</button>
+            </div>
+            <div class="swatches" id="tag-presets" aria-label="Cores sugeridas"></div>
+          </form>
+        </section>
+
+        <section class="publish-panel" aria-labelledby="publish-label">
+          <div class="publish-copy">
+            <span class="label" id="publish-label">publicar</span>
+            <h3>SQLite + GitHub Pages</h3>
+            <p>As edições vão para um rascunho do banco neste navegador. Baixe o <code>learn.sqlite</code> atualizado, substitua em <code>data/</code> e faça commit — cada nota nova vira um commit no seu perfil.</p>
+            <span class="draft-status" id="publish-status"><i class="draft-dot" aria-hidden="true"></i> conteúdo publicado · data/learn.sqlite</span>
+          </div>
+          <div class="publish-actions">
+            <button class="btn btn-primary btn-sm" type="button" data-download-db>Baixar learn.sqlite</button>
+            <button class="btn btn-danger-ghost btn-sm" type="button" data-discard-db hidden>descartar rascunho</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="login-modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal modal-login" role="dialog" aria-modal="true" aria-labelledby="login-title">
+      <div class="modal-chrome">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="crumbs">~/learn/<span>auth</span></span>
+        <button class="icon-btn" type="button" data-close aria-label="Fechar login">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <form class="login-form" id="login-form" novalidate>
+        <div class="form-head">
+          <span class="eyebrow">/ acesso</span>
+          <h2 id="login-title">Entrar</h2>
+          <p>Só o autor edita. Visitantes continuam apenas lendo.</p>
+        </div>
+        <div class="field">
+          <label for="login-user">usuário</label>
+          <input id="login-user" name="user" type="text" autocomplete="username" spellcheck="false" required>
+        </div>
+        <div class="field">
+          <label for="login-pass">senha</label>
+          <input id="login-pass" name="pass" type="password" autocomplete="current-password" required>
+        </div>
+        <p class="login-error" id="login-error" role="alert" hidden>usuário ou senha incorretos</p>
+        <div class="form-actions">
+          <button class="btn btn-ghost" type="button" data-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="confirm-modal" hidden>
+    <div class="modal-backdrop" data-confirm="cancel"></div>
+    <div class="modal modal-confirm" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+      <div class="modal-chrome">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="crumbs">~/learn/<span>sair</span></span>
+        <button class="icon-btn" type="button" data-confirm="cancel" aria-label="Cancelar saída">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="confirm-body">
+        <h2 id="confirm-title">Salvar modificações?</h2>
+        <p id="confirm-text">As notas e tags alteradas neste navegador serão gravadas em data/learn.sqlite.</p>
+        <div class="form-actions">
+          <button class="btn btn-ghost" type="button" data-confirm="no">Não</button>
+          <button class="btn btn-primary" type="button" data-confirm="yes">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="vendor/sql-wasm.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
